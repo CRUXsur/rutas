@@ -13,4 +13,9 @@ class GpsState extends Equatable {
 
   @override
   List<Object> get props => [isGpsEnabled, isGpsPermissionGranted];
+
+  //Sobre escribo este metodo para el //print('state: $state');
+  @override
+  String toString() =>
+      '{isGpsEnabled: $isGpsEnabled,isGpsPermissionGranted: $isGpsPermissionGranted}';
 }
