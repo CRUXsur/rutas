@@ -1,16 +1,16 @@
 # rutas
 
-A new Flutter project.
+Verificamos los permisos GPS-Location-Internet y obtenemos las coordenadas del dispositivo 
+para la ubicacion del cliente.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Permisos de GPS
 
-A few resources to get you started if this is your first Flutter project:
+Pantalla de loading
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Permission Handler para IOS y Android
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Detectar cambios de GPS
+
+Detectar cambios en el estado del servicio del GPS.
