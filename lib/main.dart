@@ -11,7 +11,7 @@ class RutasApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'RutasApp',
-      home: LoadingScreen(),
+      home: GpsAccessScreen(),
     );
   }
 }
