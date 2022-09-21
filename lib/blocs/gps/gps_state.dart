@@ -5,6 +5,18 @@ class GpsState extends Equatable {
   final bool isGpsEnabled;
   final bool isGpsPermissionGranted;
 
+  //es decir que cuando hagamos un cambio de estado, que el estado cambia
+  //va a revisar y evaluar nuevamente este getter, este(isAllGranted) va
+  // a ser true: si y solo si ambos permisos estan en true
+  //true ^ true = true
+  //true ^ false = false .....
+
+  //!me creo un getter,que me diga si todo esta bien
+  //!o alguno de los dos esta mal....
+  //! si los dos true => isAllGranted es true
+  //! si un de los dos es false = > isAllGranted es false
+  bool get isAllGranted => isGpsEnabled && isGpsPermissionGranted;
+
   // creo un eventoEstado (GpsState) para manejar ambos: isGpsEnabled y isGpsPermissionGranted
   //llaves: por que quiero que sea por nombre
   const GpsState({
