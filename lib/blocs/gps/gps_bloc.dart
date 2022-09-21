@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
@@ -6,6 +8,8 @@ part 'gps_event.dart';
 part 'gps_state.dart';
 
 class GpsBloc extends Bloc<GpsEvent, GpsState> {
+  StreamSubscription? gpsServiceSubscription;
+
   GpsBloc()
       : super(
           //estado incial de nuestro Bloc
@@ -34,6 +38,12 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     //!Future disparados de forma separada
     final isEnabled = await _checkGpsStatus();
     print('isEnabled: $isEnabled');
+
+    add(GpsAndPermissionEvent(
+      isGpsEnabled: isEnabled, //el estado del GPS es isEnable!
+      isGpsPermissionGranted: state.isGpsPermissionGranted, //es estado actual!
+      //  isGpsPermissionGranted: isGranted, //es estado actual!
+    ));
   }
 
   //tenemos un listener que esta pendiente de cualquier cambio
@@ -46,13 +56,20 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     //!aqui es cuando se inicializa se carga app y se si esta o no esta
     //!habilitado
     final isEnable = await Geolocator.isLocationServiceEnabled();
-    Geolocator.getServiceStatusStream().listen((event) {
+    //! esta es mi subscripcion
+    gpsServiceSubscription =
+        Geolocator.getServiceStatusStream().listen((event) {
       // !En este punto es cuando el servicio cambia!, habilito o deshabilitado
       print('service status $event');
       // !pone un uno o cero si en cualquier momento se habilita o deshabilita
       // !el servicio, tendre que estar pendiente de los cambios, disparar eventos
       final isEnabled = (event.index == 1) ? true : false;
       print('service status $isEnabled');
+      add(GpsAndPermissionEvent(
+        isGpsEnabled: isEnabled, //el estado del GPS es isEnable!
+        isGpsPermissionGranted:
+            state.isGpsPermissionGranted, //es estado actual!
+      ));
     });
     return isEnable;
   }
@@ -61,7 +78,10 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
   //deshechar
   @override
   Future<void> close() {
-    //TODO: limpiar el ServiceStatus stream
+    //DONE: limpiar el ServiceStatus stream
+    //? ? :si tienes un valor cancelalo, sino no tienes nada que cancelar
+    //? no lo hagas
+    gpsServiceSubscription?.cancel();
     return super.close();
   }
 }
