@@ -42,7 +42,11 @@ class _AccessButton extends StatelessWidget {
           elevation: 0,
           splashColor: Colors.transparent, //NO;efecto splash
           onPressed: () {
-            //TODO: por hacer
+            //Done!: por hacer
+            //el acceso a nuestro bloc, cualquiera de los dos!
+            final gpsBloc = BlocProvider.of<GpsBloc>(context); //1ra forma!
+            //final gpsBloc = context.read<GpsBloc>(); 2da forma!
+            gpsBloc.askGpsAccess(); //lo mando a mi metodo en gps_bloc.dart
           },
           child: const Text(
             'Solicitar Accesso',
