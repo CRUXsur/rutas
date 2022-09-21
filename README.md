@@ -1,16 +1,19 @@
-# rutas
+# rutas  v0.1.0
 
-Verificamos los permisos GPS-Location-Internet y obtenemos las coordenadas del dispositivo 
-para la ubicacion del cliente.
+> Verificamos los permisos GPS-Location-Internet 
+> obtenemos las coordenadas del dispositivo para la ubicacion del cliente.
 
-## Getting Started
+## TASK LIST
 
-Permisos de GPS
+    * [x] _Permisos de GPS_
 
-Pantalla de loading
+    * [x] _Pantalla de loading_
 
-Permission Handler para IOS y Android
+    * [x] _Permission Handler para IOS y Android_
 
-Detectar cambios de GPS
+    * [x] _Detectar cambios de GPS_
 
-Detectar cambios en el estado del servicio del GPS.
+    * [x] _Detectar cambios en el estado del servicio del GPS_
+
+
+:octocat: [GitHub](https://github.com/CRUXsur/rutas)
