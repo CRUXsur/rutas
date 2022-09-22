@@ -11,6 +11,7 @@ void main() {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => GpsBloc()),
+        BlocProvider(create: (context) => LocationBloc()),
       ],
       child: const RutasApp(),
     ),
