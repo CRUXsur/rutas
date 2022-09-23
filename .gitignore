@@ -1,3 +1,5 @@
+#ApiKey
+*.ios/Runner/AppDelegate.swift
 # Miscellaneous
 *.class
 *.log
