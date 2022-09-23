@@ -11,14 +11,25 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  //!inicializo
+  late LocationBloc locationBloc;
+
   @override
   void initState() {
     super.initState();
 
     //? uso este initstate, para tener acceso a mi bloc location
-    final locationBloc = BlocProvider.of<LocationBloc>(context);
     //locationBloc.getCurrentPosition();
+    locationBloc = BlocProvider.of<LocationBloc>(context);
     locationBloc.startFollowingUser();
+  }
+
+  @override
+  void dispose() {
+    //!ya no necesito esta linea, las tengo arriba
+    //!final locationBloc = BlocProvider.of<LocationBloc>(context);
+    locationBloc.stopFollowingUser();
+    super.dispose();
   }
 
   @override
