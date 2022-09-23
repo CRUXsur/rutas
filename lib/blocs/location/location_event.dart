@@ -24,6 +24,13 @@ class OnNewUserLocationEvent extends LocationEvent {
   const OnNewUserLocationEvent(this.newLocation);
 }
 
+//! disparamos estos eventos para saber si esta o no siguendo al user!
+//!   OnStartFollowingUser
+//!   OnStopFollowingUser
+
+//! luego nos creamos los manejadores de este cambio en nuestro estado
+//! vamos a manejar estos eventos
+
 class OnStartFollowingUser extends LocationEvent {
   //
 }
