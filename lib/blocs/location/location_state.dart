@@ -14,13 +14,38 @@ class LocationState extends Equatable {
   //* 1.- cual fue su ultima ubicacion conocida
   //* o su ultimo geolocation conocido
   //* 2.- y la historia de las ultimas ubicaciones
+  final LatLng? lastKnownLocation;
+  final List<LatLng> myLocationHistory;
 
   const LocationState({
     //*required this.followingUser,
     //*por defecto, no quiero que lo este siguiendo
     this.followingUser = false,
-  });
+    this.lastKnownLocation,
+    myLocationHistory,
+  }) : myLocationHistory = myLocationHistory ?? const [];
 
+  //!me creo el copywith, que regresa un nuevo LocationState
+  LocationState copyWith({
+    //definimos cada uno de los valores posibles que recibimos aca!
+    //en este caso son tres!!!!
+    bool? followingUser,
+    LatLng? lastKnownLocation,
+    List<LatLng>? myLocationHistory,
+  }) =>
+      //despues regreasmos un nuevo LocationSate()....
+      LocationState(
+        followingUser: followingUser ?? this.followingUser,
+        lastKnownLocation: lastKnownLocation ?? this.lastKnownLocation,
+        myLocationHistory: myLocationHistory ?? this.myLocationHistory,
+      );
+
+  //*este @override viene del Equatable
+  //*lo pongo aqui el followingUser, para que inclusive
+  //* flutter bloc, pueda saber cuando hay un cambio del state
+  //!por el lastKnownLocation que son opcionales, entonces
+  //!List<Object> lo hago opcional List<Object?>
   @override
-  List<Object> get props => [followingUser];
+  List<Object?> get props =>
+      [followingUser, lastKnownLocation, myLocationHistory];
 }
