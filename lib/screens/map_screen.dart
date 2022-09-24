@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../blocs/blocs.dart';
+import 'package:rutas/blocs/blocs.dart';
+import 'package:rutas/views/views.dart';
 
+//? convierto de statelesws a statefulw,
+//? mas que todo porque quiero tener el initState
+//? que solo se dispara una vez cuando este widget se
+//? construye y cuando
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
 
@@ -21,6 +25,7 @@ class _MapScreenState extends State<MapScreen> {
 
     //? uso este initstate, para tener acceso a mi bloc location
     //locationBloc.getCurrentPosition();
+    //!final locationBloc = BlocProvider.of<LocationBloc>(context);
     locationBloc = BlocProvider.of<LocationBloc>(context);
     locationBloc.startFollowingUser();
   }
@@ -41,17 +46,25 @@ class _MapScreenState extends State<MapScreen> {
         if (state.lastKnownLocation == null) {
           return const Center(child: Text('Espere por favor...'));
         }
-
+        //
         // return Center(
         //   child: Text(
         //       '${state.lastKnownLocation!.latitude},${state.lastKnownLocation!.longitude}'),
         // );
-
-        final CameraPosition initialCameraPosition = CameraPosition(
-          target: state.lastKnownLocation!,
-          zoom: 15,
+        //
+        // final CameraPosition initialCameraPosition = CameraPosition(
+        //   target: state.lastKnownLocation!,
+        //   zoom: 15,
+        // );
+        //return GoogleMap(initialCameraPosition: initialCameraPosition);
+        return SingleChildScrollView(
+          child: Stack(
+            children: [
+              MapView(initialLocation: state.lastKnownLocation!),
+              // TODO: botones y mas cosas!........
+            ],
+          ),
         );
-        return GoogleMap(initialCameraPosition: initialCameraPosition);
       },
     ));
   }
