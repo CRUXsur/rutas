@@ -31,5 +31,17 @@
 
     - [x] _Cambiar el punto de vista del mapa_
 
+## TRAZAR RUTA DENTRO DEL MAPA v0.3.0    
+
+    [x] Polylines
+
+    [x] Trazar la ruta por donde el usuario se está moviendo
+
+    [x] Lógica para seguir y dejar de seguir a un usuario
+
+    [x] Conocer la posición central del mapa
+
+    [x] Ocultar y mostrar polylines
+
 
 :octocat: [GitHub](https://github.com/CRUXsur/rutas)
