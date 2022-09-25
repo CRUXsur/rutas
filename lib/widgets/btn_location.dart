@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rutas/ui/ui.dart';
 
 import '../blocs/blocs.dart';
 
@@ -23,9 +24,15 @@ class BtnCurrentLocation extends StatelessWidget {
           onPressed: () {
             //DONE: Llamar el bloc
             final userLocation = locationBloc.state.lastKnownLocation;
+
             //la ultima ubicacion puede ser nula....
-            if (userLocation == null) return;
-            //TODO: SnackBar
+            //SnackBar REUTILIZABLES, PERSONALIZADOS!!
+            if (userLocation == null) {
+              final snack = CustomSnackbar(message: 'No hay ubicacion');
+              ScaffoldMessenger.of(context).showSnackBar(snack);
+              return;
+            }
+            //Done: SnackBar
             mapBloc.moveCamera(userLocation);
           },
         ),
