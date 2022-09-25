@@ -27,4 +27,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     emit(state.copyWith(isMapInitialized: true));
   }
+
+  //nos creamos un evento, de tal manera que nos pueda servir esto
+  //en cualquier momento para mover el mapa en cualquier lado de
+  //nuestra apliacacion
+
+  //Rx LatLng posicionDondeQuieroQueSeVaya
+  void moveCamera(LatLng newLocation) {
+    final cameraUpdate = CameraUpdate.newLatLng(newLocation);
+    _mapController?.animateCamera(cameraUpdate);
+  }
 }

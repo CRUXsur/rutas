@@ -10,7 +10,7 @@ class LocationState extends Equatable {
   //*eventualmente yo necesito saber, si yo estoy siguiendo
   //*al usuario..
   final bool followingUser;
-  // Done 2 TODO! TODO
+  // Done 2 todoo!
   //* 1.- cual fue su ultima ubicacion conocida
   //* o su ultimo geolocation conocido
   //* 2.- y la historia de las ultimas ubicaciones

@@ -77,11 +77,11 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     gpsServiceSubscription =
         Geolocator.getServiceStatusStream().listen((event) {
       // !En este punto es cuando el servicio cambia!, habilito o deshabilitado
-      print('service status $event');
+      //print('service status $event');
       // !pone un uno o cero si en cualquier momento se habilita o deshabilita
       // !el servicio, tendre que estar pendiente de los cambios, disparar eventos
       final isEnabled = (event.index == 1) ? true : false;
-      print('service status $isEnabled');
+      //print('service status $isEnabled');
       add(GpsAndPermissionEvent(
         isGpsEnabled: isEnabled, //el estado del GPS es isEnable!
         isGpsPermissionGranted:

@@ -57,7 +57,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   //?empezar a darle seguimiento al usuario
   void startFollowingUser() {
     add(OnStartFollowingUser());
-    print('startFollowingUser');
+    //print('startFollowingUser');
     positionStream = Geolocator.getPositionStream().listen((event) {
       final position = event;
       //print('Position: $position');
@@ -72,7 +72,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   void stopFollowingUser() {
     positionStream?.cancel();
     add(OnStopFollowingUser());
-    print('stopFollowingUser');
+    //print('stopFollowingUser');
   }
 
   //! cuando hacemos el close del bloc vamos a mandar a llamar

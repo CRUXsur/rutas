@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rutas/blocs/blocs.dart';
 import 'package:rutas/views/views.dart';
 
+import '../widgets/widgets.dart';
+
 //? convierto de statelesws a statefulw,
 //? mas que todo porque quiero tener el initState
 //? que solo se dispara una vez cuando este widget se
@@ -40,32 +42,41 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<LocationBloc, LocationState>(
-      builder: (context, state) {
-        //si no tenemos inguna ubicacion regresamos...
-        if (state.lastKnownLocation == null) {
-          return const Center(child: Text('Espere por favor...'));
-        }
-        //
-        // return Center(
-        //   child: Text(
-        //       '${state.lastKnownLocation!.latitude},${state.lastKnownLocation!.longitude}'),
-        // );
-        //
-        // final CameraPosition initialCameraPosition = CameraPosition(
-        //   target: state.lastKnownLocation!,
-        //   zoom: 15,
-        // );
-        //return GoogleMap(initialCameraPosition: initialCameraPosition);
-        return SingleChildScrollView(
-          child: Stack(
-            children: [
-              MapView(initialLocation: state.lastKnownLocation!),
-              // TODO: botones y mas cosas!........
-            ],
-          ),
-        );
-      },
-    ));
+    return Scaffold(
+      body: BlocBuilder<LocationBloc, LocationState>(
+        builder: (context, state) {
+          //si no tenemos inguna ubicacion regresamos...
+          if (state.lastKnownLocation == null) {
+            return const Center(child: Text('Espere por favor...'));
+          }
+          //
+          // return Center(
+          //   child: Text(
+          //       '${state.lastKnownLocation!.latitude},${state.lastKnownLocation!.longitude}'),
+          // );
+          //
+          // final CameraPosition initialCameraPosition = CameraPosition(
+          //   target: state.lastKnownLocation!,
+          //   zoom: 15,
+          // );
+          //return GoogleMap(initialCameraPosition: initialCameraPosition);
+          return SingleChildScrollView(
+            child: Stack(
+              children: [
+                MapView(initialLocation: state.lastKnownLocation!),
+                // TODO: botones y mas cosas!........
+              ],
+            ),
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: const [
+          BtnCurrentLocation(),
+        ],
+      ),
+    );
   }
 }
