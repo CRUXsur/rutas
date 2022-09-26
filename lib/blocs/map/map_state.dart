@@ -8,13 +8,13 @@ class MapState extends Equatable {
   //*ya esta el mapa cargado?, si ya tengo accceso a el?
   //*ya puedo usarlo?
   final bool isMapInitialized;
-  final bool followUser;
+  final bool isFollowingUser;
   const MapState({
     // required this.isMapInitialized,
     // required this.followUser,
     // como los inicializo => ya no required!!!!
     this.isMapInitialized = false,
-    this.followUser = true, //por defecto
+    this.isFollowingUser = true, //por defecto
   });
 
   MapState copyWith({
@@ -28,12 +28,12 @@ class MapState extends Equatable {
         //sera igual a esas propiedades o el valor que tenga el estado...
         //*inicializamos con valores...
         isMapInitialized: isMapInitialized ?? this.isMapInitialized,
-        followUser: followUser ?? this.followUser,
+        isFollowingUser: followUser ?? this.isFollowingUser,
       );
 
   // como tengo dos propiedaes y eventualmente mi Bloc, necesita saber
   // cuando un estado es diferente a otro......entonces esas dos propiedades
   // la coloco en las props....props => [isMapInitialized, followUser];
   @override
-  List<Object> get props => [isMapInitialized, followUser];
+  List<Object> get props => [isMapInitialized, isFollowingUser];
 }

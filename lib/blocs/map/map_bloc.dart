@@ -25,14 +25,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnMapInitializedEvent>(_onInitMap);
 
     //tengo que estar escuchando los cambios en el stream!
-    //y esta es nuestra subcription....
+    //=>necesito suscribirme y esta es nuestra subcription....
     locationBloc.stream.listen((LocationState) {
       //stream necesito limpiarlo!
       //necesito saber si necesito mover la camara,
       //para mover la camara,primero tengo que saber varias cosas,
       //por ejemplo, si en el state.followUser del mapBloc , no esta
       //siguiendo al usuario => no hago nada aqui!
-      if (!state.followUser) return;
+      if (!state.isFollowingUser) return;
       //else
       //verifico si en el LocationState, tenemos el lastKnownLocation
       if (LocationState.lastKnownLocation == null) return;
