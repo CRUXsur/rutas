@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rutas/blocs/blocs.dart';
 
 // import 'package:google_maps_flutter/google_maps_flutter.dart' show GoogleMapController, LatLng;
 import '../../themes/themes.dart';
@@ -11,11 +12,35 @@ part 'map_event.dart';
 part 'map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
+  //no le pongo ? opcional, porque es obligatorio
+  //final LocationBloc? locationBloc;
+  final LocationBloc locationBloc; //es obligatorio
+
   GoogleMapController? _mapController;
 
-  MapBloc() : super(const MapState()) {
+  MapBloc({
+    required this.locationBloc,
+  }) : super(const MapState()) {
     //on<OnMapInitializedEvent>((event, emit) => emit(state.copyWith(isMapInitialized: true)));
     on<OnMapInitializedEvent>(_onInitMap);
+
+    //tengo que estar escuchando los cambios en el stream!
+    //y esta es nuestra subcription....
+    locationBloc.stream.listen((LocationState) {
+      //stream necesito limpiarlo!
+      //necesito saber si necesito mover la camara,
+      //para mover la camara,primero tengo que saber varias cosas,
+      //por ejemplo, si en el state.followUser del mapBloc , no esta
+      //siguiendo al usuario => no hago nada aqui!
+      if (!state.followUser) return;
+      //else
+      //verifico si en el LocationState, tenemos el lastKnownLocation
+      if (LocationState.lastKnownLocation == null) return;
+
+      // else move camera
+      //y ! porque ya verifique que si existe!
+      moveCamera(LocationState.lastKnownLocation!);
+    });
   }
 
   void _onInitMap(OnMapInitializedEvent event, Emitter<MapState> emit) {

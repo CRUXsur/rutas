@@ -14,7 +14,7 @@ class MapState extends Equatable {
     // required this.followUser,
     // como los inicializo => ya no required!!!!
     this.isMapInitialized = false,
-    this.followUser = false,
+    this.followUser = true, //por defecto
   });
 
   MapState copyWith({
