@@ -37,6 +37,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     //polylines
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
+    on<OnToggleUserRoute>(
+        (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
 
     //tengo que estar escuchando los cambios en el stream!
     //=>necesito suscribirme y esta es nuestra subcription....

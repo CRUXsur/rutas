@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:rutas/blocs/blocs.dart';
 import 'package:rutas/views/views.dart';
+import 'package:rutas/widgets/btn_toggle_user_route.dart';
 import 'package:rutas/widgets/widgets.dart';
 
 //? convierto de statelesws a statefulw,
@@ -61,12 +63,17 @@ class _MapScreenState extends State<MapScreen> {
           //return GoogleMap(initialCameraPosition: initialCameraPosition);
           return BlocBuilder<MapBloc, MapState>(
             builder: (context, mapState) {
+              //me creo un objeto
+              Map<String, Polyline> polylines = Map.from(mapState.polylines);
+              if (!mapState.showMyRoute) {
+                polylines.removeWhere((key, value) => key == 'myRoute');
+              }
               return SingleChildScrollView(
                 child: Stack(
                   children: [
                     MapView(
                       initialLocation: locationState.lastKnownLocation!,
-                      polylines: mapState.polylines.values.toSet(),
+                      polylines: polylines.values.toSet(),
                     ),
                     // TODO: botones y mas cosas!........
                   ],
@@ -80,6 +87,7 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: const [
+          BtnToggleUserRoute(),
           BtnFollowUser(),
           BtnCurrentLocation(),
         ],

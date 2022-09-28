@@ -9,6 +9,7 @@ class MapState extends Equatable {
   //*ya puedo usarlo?
   final bool isMapInitialized;
   final bool isFollowingUser;
+  final bool showMyRoute;
 
   //Polylines
   final Map<String, Polyline> polylines;
@@ -26,6 +27,7 @@ class MapState extends Equatable {
     // como los inicializo => ya no required!!!!
     this.isMapInitialized = false,
     this.isFollowingUser = true, //por defecto
+    this.showMyRoute = true,
     Map<String, Polyline>? polylines, //recibo polylines opcionales
   }) : polylines = polylines ?? const {};
 
@@ -35,6 +37,7 @@ class MapState extends Equatable {
           //son opcionales: ? pueda ser que las reciba, pueda ser que no!
           bool? isMapInitialized,
           bool? isFollowingUser,
+          bool? showMyRoute,
           Map<String, Polyline>? polylines}) =>
       MapState(
         //a la hora de crear un nuevo estado...MapState
@@ -43,6 +46,7 @@ class MapState extends Equatable {
         //*inicializamos con valores...
         isMapInitialized: isMapInitialized ?? this.isMapInitialized,
         isFollowingUser: isFollowingUser ?? this.isFollowingUser,
+        showMyRoute: showMyRoute ?? this.showMyRoute,
         polylines: polylines ?? this.polylines,
       );
 
@@ -50,5 +54,6 @@ class MapState extends Equatable {
   // cuando un estado es diferente a otro......entonces esas dos propiedades
   // la coloco en las props....props => [isMapInitialized, followUser];
   @override
-  List<Object> get props => [isMapInitialized, isFollowingUser, polylines];
+  List<Object> get props =>
+      [isMapInitialized, isFollowingUser, showMyRoute, polylines];
 }

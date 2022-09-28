@@ -24,3 +24,6 @@ class UpdateUserPolylineEvent extends MapEvent {
   final List<LatLng> userLocation;
   const UpdateUserPolylineEvent(this.userLocation);
 }
+
+//ara sohwMyRoutes me creo un toggle!
+class OnToggleUserRoute extends MapEvent {}
