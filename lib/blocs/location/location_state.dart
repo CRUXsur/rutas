@@ -9,7 +9,7 @@ part of 'location_bloc.dart';
 class LocationState extends Equatable {
   //*eventualmente yo necesito saber, si yo estoy siguiendo
   //*al usuario..
-  final bool followingUser;
+  final bool isFollowingUser;
   // Done 2 todoo!
   //* 1.- cual fue su ultima ubicacion conocida
   //* o su ultimo geolocation conocido
@@ -20,7 +20,7 @@ class LocationState extends Equatable {
   const LocationState({
     //*required this.followingUser,
     //*por defecto, no quiero que lo este siguiendo
-    this.followingUser = false,
+    this.isFollowingUser = false,
     this.lastKnownLocation,
     myLocationHistory,
   }) : myLocationHistory = myLocationHistory ?? const [];
@@ -29,13 +29,13 @@ class LocationState extends Equatable {
   LocationState copyWith({
     //definimos cada uno de los valores posibles que recibimos aca!
     //en este caso son tres!!!!
-    bool? followingUser,
+    bool? isFollowingUser,
     LatLng? lastKnownLocation,
     List<LatLng>? myLocationHistory,
   }) =>
       //despues regreasmos un nuevo LocationSate()....
       LocationState(
-        followingUser: followingUser ?? this.followingUser,
+        isFollowingUser: isFollowingUser ?? this.isFollowingUser,
         lastKnownLocation: lastKnownLocation ?? this.lastKnownLocation,
         myLocationHistory: myLocationHistory ?? this.myLocationHistory,
       );
@@ -47,5 +47,5 @@ class LocationState extends Equatable {
   //!List<Object> lo hago opcional List<Object?>
   @override
   List<Object?> get props =>
-      [followingUser, lastKnownLocation, myLocationHistory];
+      [isFollowingUser, lastKnownLocation, myLocationHistory];
 }

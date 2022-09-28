@@ -15,6 +15,7 @@ class BtnFollowUser extends StatelessWidget {
         backgroundColor: Colors.white,
         maxRadius: 25,
         child: BlocBuilder<MapBloc, MapState>(
+          //estoy escuchando el MapBloc
           builder: (context, state) {
             return IconButton(
               icon: Icon(
@@ -26,6 +27,7 @@ class BtnFollowUser extends StatelessWidget {
               onPressed: () {
                 //lo unico que necesita es disparar el FollowUser
                 //or podemos hacerlo como un toggle!
+                mapBloc.add(OnStartFollowingUserEvent());
               },
             );
           },

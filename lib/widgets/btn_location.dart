@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rutas/ui/ui.dart';
 
-import '../blocs/blocs.dart';
+import 'package:rutas/blocs/blocs.dart';
 
 class BtnCurrentLocation extends StatelessWidget {
   const BtnCurrentLocation({super.key});

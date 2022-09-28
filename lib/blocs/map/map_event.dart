@@ -14,6 +14,6 @@ class OnMapInitializedEvent extends MapEvent {
   const OnMapInitializedEvent(this.controller); //constructor posicional
 }
 
-class onStopFollowingUser extends MapEvent {}
+class OnStopFollowingUserEvent extends MapEvent {}
 
-class onStartFollowingUser extends MapEvent {}
+class OnStartFollowingUserEvent extends MapEvent {}

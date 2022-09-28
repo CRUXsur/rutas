@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rutas/blocs/blocs.dart';
 import 'package:rutas/views/views.dart';
-
-import '../widgets/widgets.dart';
+import 'package:rutas/widgets/widgets.dart';
 
 //? convierto de statelesws a statefulw,
 //? mas que todo porque quiero tener el initState
@@ -44,9 +43,9 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<LocationBloc, LocationState>(
-        builder: (context, state) {
+        builder: (context, locationState) {
           //si no tenemos inguna ubicacion regresamos...
-          if (state.lastKnownLocation == null) {
+          if (locationState.lastKnownLocation == null) {
             return const Center(child: Text('Espere por favor...'));
           }
           //
@@ -60,13 +59,20 @@ class _MapScreenState extends State<MapScreen> {
           //   zoom: 15,
           // );
           //return GoogleMap(initialCameraPosition: initialCameraPosition);
-          return SingleChildScrollView(
-            child: Stack(
-              children: [
-                MapView(initialLocation: state.lastKnownLocation!),
-                // TODO: botones y mas cosas!........
-              ],
-            ),
+          return BlocBuilder<MapBloc, MapState>(
+            builder: (context, mapState) {
+              return SingleChildScrollView(
+                child: Stack(
+                  children: [
+                    MapView(
+                      initialLocation: locationState.lastKnownLocation!,
+                      polylines: mapState.polylines.values.toSet(),
+                    ),
+                    // TODO: botones y mas cosas!........
+                  ],
+                ),
+              );
+            },
           );
         },
       ),
