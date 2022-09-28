@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -34,9 +35,15 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnStopFollowingUserEvent>(
         (event, emit) => (state.copyWith(isFollowingUser: false)));
 
+    //polylines
+    on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
+
     //tengo que estar escuchando los cambios en el stream!
     //=>necesito suscribirme y esta es nuestra subcription....
     locationBloc.stream.listen((locationState) {
+      if (locationState.lastKnownLocation != null) {
+        add(UpdateUserPolylineEvent(locationState.myLocationHistory));
+      }
       //stream necesito limpiarlo!
       //necesito saber si necesito mover la camara,
       //para mover la camara,primero tengo que saber varias cosas,
@@ -68,6 +75,25 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     emit(state.copyWith(isFollowingUser: true));
     if (locationBloc.state.lastKnownLocation == null) return;
     moveCamera(locationBloc.state.lastKnownLocation!);
+  }
+
+  void _onPolylineNewPoint(
+      UpdateUserPolylineEvent event, Emitter<MapState> emit) {
+    //me creo la polyline , que es la linea que  yo quiero manejar
+    //
+    final myRoute = Polyline(
+      polylineId: const PolylineId('myRoute'),
+      color: Colors.black,
+      width: 5,
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
+      points: event.userLocation,
+    );
+
+    final currentPolylines = Map<String, Polyline>.from(state.polylines);
+    currentPolylines['myRoute'] = myRoute;
+    //myRoute es lo que tengo que mandar al state
+    emit(state.copyWith(polylines: currentPolylines));
   }
 
   //nos creamos un evento, de tal manera que nos pueda servir esto
