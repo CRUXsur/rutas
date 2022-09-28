@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -22,6 +23,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   final LocationBloc locationBloc; //es obligatorio
 
   GoogleMapController? _mapController;
+
+  StreamSubscription<LocationState>? locationStateSubscription;
 
   MapBloc({
     required this.locationBloc,
@@ -106,5 +109,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   void moveCamera(LatLng newLocation) {
     final cameraUpdate = CameraUpdate.newLatLng(newLocation);
     _mapController?.animateCamera(cameraUpdate);
+  }
+
+  @override
+  Future<void> close() {
+    locationStateSubscription?.cancel();
+    return super.close();
   }
 }
