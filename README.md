@@ -43,5 +43,19 @@
 
     [x] Ocultar y mostrar polylines
 
+## DIRECCIONES HASTA UN PUNTO ESPECIFICO  v0.4.0
+
+    [x] Colocar un marcador para selección manual del destino
+
+    [x] Bloc para controlar la posición y búsqueda manual
+
+    [x] Animar pin y objetos
+
+    [x] Servicios de Mapbox para obtener direcciones
+
+    [x] Traffic Service
+
+    [x] Dibujar ruta en el mapa    
+
 
 :octocat: [GitHub](https://github.com/CRUXsur/rutas)
