@@ -13,6 +13,12 @@ class ManualMarker extends StatelessWidget {
       child: Stack(
         children: [
           //
+          const Positioned(
+            top: 70,
+            left: 20,
+            child: _BtnBack(),
+          ),
+          //
           Center(
             child: Transform.translate(
               offset: const Offset(0, -22),
@@ -21,8 +27,58 @@ class ManualMarker extends StatelessWidget {
                 child: const Icon(Icons.location_on_rounded, size: 50),
               ),
             ),
-          )
+          ),
+          //Boton de confirmar
+          Positioned(
+            bottom: 70,
+            left: 40,
+            child: FadeInUp(
+              duration: const Duration(milliseconds: 300),
+              child: MaterialButton(
+                minWidth: size.width - 120,
+                color: Colors.black,
+                elevation: 0,
+                height: 50,
+                shape: const StadiumBorder(),
+                onPressed: () {
+                  // TODO: confirmar ubicacion.....
+                },
+                child: const Text(
+                  'Confirmar destino',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w300),
+                ),
+              ),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class _BtnBack extends StatelessWidget {
+  const _BtnBack({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeInLeft(
+      duration: const Duration(milliseconds: 300),
+      child: CircleAvatar(
+        maxRadius: 30,
+        backgroundColor: Colors.white,
+        child: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            //TODO: Cancelar el marcador manual
+            //
+          },
+        ),
       ),
     );
   }
