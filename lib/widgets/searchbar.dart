@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:rutas/delegates/delegates.dart';
+
 class SearchBar extends StatelessWidget {
   const SearchBar({super.key});
 
@@ -14,7 +16,8 @@ class SearchBar extends StatelessWidget {
         //height: 50,
         child: GestureDetector(
           onTap: () {
-            print('ontap');
+            //print('ontap');
+            showSearch(context: context, delegate: SearchDestinationDelegate());
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
