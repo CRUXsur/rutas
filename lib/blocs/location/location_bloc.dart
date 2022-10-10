@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 //import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
-import 'package:rutas/blocs/blocs.dart';
+//import 'package:rutas/blocs/blocs.dart';
 
 part 'location_event.dart';
 part 'location_state.dart';
@@ -18,7 +18,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   //*LocationBloc() : super(LocationInitial()) {
   LocationBloc() : super(const LocationState()) {
     // on<LocationEvent>((event, emit) {
-    //   // TODO: implement event handler
+    // implement event handler
     // });
     //! los creo y despues tengo que mandarlos a llamar a estos dos
     //! eventos en los lugares respectivos......
