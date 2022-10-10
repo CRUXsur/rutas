@@ -99,8 +99,10 @@ class _BtnBack extends StatelessWidget {
             color: Colors.black,
           ),
           onPressed: () {
-            //TODO: Cancelar el marcador manual
-            //
+            //DoneTODO: Cancelar el marcador manual
+            BlocProvider.of<SearchBloc>(context).add(
+              OnDeActivateManualMarkerEvent(),
+            );
           },
         ),
       ),
