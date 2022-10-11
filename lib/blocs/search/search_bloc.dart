@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rutas/services/services.dart';
 
 part 'search_event.dart';
@@ -15,5 +16,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         (event, emit) => emit(state.copyWith(displayManualMarker: true)));
     on<OnDeActivateManualMarkerEvent>(
         (event, emit) => emit(state.copyWith(displayManualMarker: false)));
+  }
+
+  //nos creamos un nuevo metodo
+  Future getCoorsStartToEnd(LatLng start, LatLng end) async {
+    //
+    final resp = await trafficService.getCoorsStartToEnd(start, end);
   }
 }

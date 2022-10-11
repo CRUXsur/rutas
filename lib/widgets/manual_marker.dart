@@ -31,6 +31,9 @@ class _ManualMarkerBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final searchBloc = BlocProvider.of<SearchBloc>(context);
+    final locationBloc = BlocProvider.of<LocationBloc>(context);
+    final mapBloc = BlocProvider.of<MapBloc>(context);
     return SizedBox(
       width: size.width,
       height: size.height,
@@ -64,8 +67,15 @@ class _ManualMarkerBody extends StatelessWidget {
                 elevation: 0,
                 height: 50,
                 shape: const StadiumBorder(),
-                onPressed: () {
-                  // TODO: confirmar ubicacion.....
+                onPressed: () async {
+                  //TODO:loading.....
+                  //Done: confirmar ubicacion.....
+                  final start = locationBloc.state.lastKnownLocation;
+                  if (start == null) return; //una regla de validacion....
+
+                  final end = mapBloc.mapCenter;
+                  if (end == null) return; //una regla de validacion....
+                  await searchBloc.getCoorsStartToEnd(start, end);
                 },
                 child: const Text(
                   'Confirmar destino',

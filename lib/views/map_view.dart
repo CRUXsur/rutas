@@ -41,6 +41,7 @@ class MapView extends StatelessWidget {
 
           onMapCreated: (controller) =>
               mapBloc.add(OnMapInitializedEvent(controller)),
+          onCameraMove: (position) => mapBloc.mapCenter = position.target,
           //TODO: Markers
 
           //Aqui no es recomendableTODO: Cuando se mueve el mapa

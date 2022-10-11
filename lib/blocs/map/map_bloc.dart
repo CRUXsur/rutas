@@ -23,6 +23,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   final LocationBloc locationBloc; //es obligatorio
 
   GoogleMapController? _mapController;
+  LatLng? mapCenter;
 
   StreamSubscription<LocationState>? locationStateSubscription;
 
