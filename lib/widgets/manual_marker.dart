@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rutas/blocs/blocs.dart';
+import 'package:rutas/helpers/helpers.dart';
 
 class ManualMarker extends StatelessWidget {
   const ManualMarker({super.key});
@@ -76,9 +77,19 @@ class _ManualMarkerBody extends StatelessWidget {
                   final end = mapBloc.mapCenter;
                   if (end == null) return; //una regla de validacion....
                   //print(end);
+
+                  //como ya tengo el start y el end, pongo mi loading message
+                  showLoadingMessage(context);
+
                   final destination =
                       await searchBloc.getCoorsStartToEnd(start, end);
-                  mapBloc.drawRoutePolyline(destination);
+                  await mapBloc.drawRoutePolyline(destination);
+
+                  //
+                  //quitamos la barra boton y el icono <
+                  searchBloc.add(OnDeActivateManualMarkerEvent());
+                  //
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   'Confirmar destino',
