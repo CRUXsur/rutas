@@ -38,6 +38,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         .toList();
 
     return RouteDestination(
-        points: latLngList, duration: duration, distance: distance);
+      points: latLngList,
+      duration: duration,
+      distance: distance,
+    );
   }
 }

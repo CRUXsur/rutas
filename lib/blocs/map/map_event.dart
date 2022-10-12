@@ -27,3 +27,8 @@ class UpdateUserPolylineEvent extends MapEvent {
 
 //ara sohwMyRoutes me creo un toggle!
 class OnToggleUserRoute extends MapEvent {}
+
+class DisplayPolylinesEvent extends MapEvent {
+  final Map<String, Polyline> polylines;
+  const DisplayPolylinesEvent(this.polylines);
+}

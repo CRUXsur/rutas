@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rutas/blocs/blocs.dart';
+import 'package:rutas/models/models.dart';
 
 // import 'package:google_maps_flutter/google_maps_flutter.dart' show GoogleMapController, LatLng;
 import 'package:rutas/themes/themes.dart';
@@ -43,6 +44,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
     on<OnToggleUserRoute>(
         (event, emit) => emit(state.copyWith(showMyRoute: !state.showMyRoute)));
+
+    on<DisplayPolylinesEvent>(
+        (event, emit) => emit(state.copyWith(polylines: event.polylines)));
 
     //tengo que estar escuchando los cambios en el stream!
     //=>necesito suscribirme y esta es nuestra subcription....
@@ -100,6 +104,24 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     currentPolylines['myRoute'] = myRoute;
     //myRoute es lo que tengo que mandar al state
     emit(state.copyWith(polylines: currentPolylines));
+  }
+
+  Future drawRoutePolyline(RouteDestination destination) async {
+    //creo mi ruta, polyline
+    final myRoute = Polyline(
+      polylineId: const PolylineId('route'),
+      color: Colors.black,
+      width: 5,
+      points: destination.points,
+      startCap: Cap.roundCap,
+      endCap: Cap.roundCap,
+    );
+
+    final curretPolylines = Map<String, Polyline>.from(state.polylines);
+    curretPolylines['route'] = myRoute;
+
+    //emito ese evento
+    add(DisplayPolylinesEvent(curretPolylines));
   }
 
   //nos creamos un evento, de tal manera que nos pueda servir esto
