@@ -13,7 +13,7 @@ class TrafficInterceptor extends Interceptor {
       'geometries': 'polyline6',
       'overview': 'simplified',
       'steps': false,
-      'access_token': 'accessToken',
+      'access_token': accessToken,
     });
     super.onRequest(options, handler);
   }

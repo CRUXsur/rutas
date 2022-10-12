@@ -72,9 +72,10 @@ class _ManualMarkerBody extends StatelessWidget {
                   //Done: confirmar ubicacion.....
                   final start = locationBloc.state.lastKnownLocation;
                   if (start == null) return; //una regla de validacion....
-
+                  //print(start);
                   final end = mapBloc.mapCenter;
                   if (end == null) return; //una regla de validacion....
+                  //print(end);
                   await searchBloc.getCoorsStartToEnd(start, end);
                 },
                 child: const Text(
