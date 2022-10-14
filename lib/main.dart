@@ -32,6 +32,7 @@ class RutasApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'RutasApp',
       home: LoadingScreen(),
+      routes: {},
     );
   }
 }

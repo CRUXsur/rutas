@@ -17,7 +17,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }) : super(const SearchState()) {
     on<OnActivateManualMarkerEvent>(
         (event, emit) => emit(state.copyWith(displayManualMarker: true)));
-    on<OnDeActivateManualMarkerEvent>(
+    on<OnDeactivateManualMarkerEvent>(
         (event, emit) => emit(state.copyWith(displayManualMarker: false)));
   }
 

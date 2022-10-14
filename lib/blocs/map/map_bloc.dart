@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:rutas/blocs/blocs.dart';
 import 'package:rutas/models/models.dart';
+import 'package:rutas/themes/themes.dart';
 
 // import 'package:google_maps_flutter/google_maps_flutter.dart' show GoogleMapController, LatLng;
-import 'package:rutas/themes/themes.dart';
 
 part 'map_event.dart';
 part 'map_state.dart';
@@ -35,10 +36,12 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnMapInitializedEvent>(_onInitMap);
 
     //
-    on<OnStartFollowingUserEvent>(_onStartFollowingUser);
+    //on<OnStartFollowingUserEvent>(_onStartFollowingUserEv);
+    on<OnStartFollowingUserEvent>(
+        (event, emit) => emit(state.copyWith(isFollowingUser: true)));
 
     on<OnStopFollowingUserEvent>(
-        (event, emit) => (state.copyWith(isFollowingUser: false)));
+        (event, emit) => emit(state.copyWith(isFollowingUser: false)));
 
     //polylines
     on<UpdateUserPolylineEvent>(_onPolylineNewPoint);
@@ -50,7 +53,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     //tengo que estar escuchando los cambios en el stream!
     //=>necesito suscribirme y esta es nuestra subcription....
-    locationBloc.stream.listen((locationState) {
+    locationStateSubscription = locationBloc.stream.listen((locationState) {
       if (locationState.lastKnownLocation != null) {
         add(UpdateUserPolylineEvent(locationState.myLocationHistory));
       }
@@ -80,12 +83,12 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     emit(state.copyWith(isMapInitialized: true));
   }
 
-  void _onStartFollowingUser(
-      OnStartFollowingUserEvent event, Emitter<MapState> emit) {
-    emit(state.copyWith(isFollowingUser: true));
-    if (locationBloc.state.lastKnownLocation == null) return;
-    moveCamera(locationBloc.state.lastKnownLocation!);
-  }
+  // void _onStartFollowingUserEv(
+  //     OnStartFollowingUserEvent event, Emitter<MapState> emit) {
+  //   emit(state.copyWith(isFollowingUser: true));
+  //   if (locationBloc.state.lastKnownLocation == null) return;
+  //   moveCamera(locationBloc.state.lastKnownLocation!);
+  // }
 
   void _onPolylineNewPoint(
       UpdateUserPolylineEvent event, Emitter<MapState> emit) {
@@ -97,7 +100,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       width: 5,
       startCap: Cap.roundCap,
       endCap: Cap.roundCap,
-      points: event.userLocation,
+      points: event.userLocations,
     );
 
     final currentPolylines = Map<String, Polyline>.from(state.polylines);

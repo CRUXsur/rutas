@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/blocs.dart';
+import 'package:rutas/blocs/blocs.dart';
 
 class BtnFollowUser extends StatelessWidget {
   const BtnFollowUser({super.key});

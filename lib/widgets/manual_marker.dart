@@ -52,7 +52,7 @@ class _ManualMarkerBody extends StatelessWidget {
               offset: const Offset(0, -22),
               child: BounceInDown(
                 from: 100,
-                child: const Icon(Icons.location_on_rounded, size: 50),
+                child: const Icon(Icons.location_on_rounded, size: 60),
               ),
             ),
           ),
@@ -87,7 +87,7 @@ class _ManualMarkerBody extends StatelessWidget {
 
                   //
                   //quitamos la barra boton y el icono <
-                  searchBloc.add(OnDeActivateManualMarkerEvent());
+                  searchBloc.add(OnDeactivateManualMarkerEvent());
                   //
                   Navigator.pop(context);
                 },
@@ -125,7 +125,7 @@ class _BtnBack extends StatelessWidget {
           onPressed: () {
             //DoneTODO: Cancelar el marcador manual
             BlocProvider.of<SearchBloc>(context).add(
-              OnDeActivateManualMarkerEvent(),
+              OnDeactivateManualMarkerEvent(),
             );
           },
         ),

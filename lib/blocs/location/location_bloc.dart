@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
-//import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
-//import 'package:rutas/blocs/blocs.dart';
 
 part 'location_event.dart';
 part 'location_state.dart';
@@ -60,6 +58,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   void startFollowingUser() {
     add(OnStartFollowingUser());
     //print('startFollowingUser');
+    //listen , necesito estar escuchado cualquier cambio en su ubicacion
     positionStream = Geolocator.getPositionStream().listen((event) {
       final position = event;
       //print('Position: $position');

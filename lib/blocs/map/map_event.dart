@@ -21,8 +21,8 @@ class OnStartFollowingUserEvent extends MapEvent {}
 class UpdateUserPolylineEvent extends MapEvent {
   //aqui yo voy a ocupar la historia, todos los polylines
   //todas las ubicaciones del usuario
-  final List<LatLng> userLocation;
-  const UpdateUserPolylineEvent(this.userLocation);
+  final List<LatLng> userLocations;
+  const UpdateUserPolylineEvent(this.userLocations);
 }
 
 //ara sohwMyRoutes me creo un toggle!
