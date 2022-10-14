@@ -57,5 +57,18 @@
 
     [x] Dibujar ruta en el mapa    
 
+## DIRECCIONES EN EL MAPA  v0.5.2
+
+    [x] Consumir servicios de GeoCoding
+
+    [x] SearchDelegate
+
+    [x] Ruta destino
+
+    [x] Historial de búsquedas
+
+    [x] Debouncer
+
+
 
 :octocat: [GitHub](https://github.com/CRUXsur/rutas)
